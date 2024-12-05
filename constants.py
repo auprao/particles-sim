@@ -1,0 +1,4 @@
+FPS = 60 # what for
+
+WIDTH_WINDOW = 500
+HEIGHT_WINDOW = 500
