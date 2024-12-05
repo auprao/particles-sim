@@ -28,11 +28,11 @@ def main() :
     looping = True
 
     while looping :
-
+        
         for electron in electrons :
             electron.draw_over(surface)
             electron.color = random.choice((BLUE, WHITE))
-            electron.x += 1
+            electron.move_random()
             electron.draw_particle(surface)
 
         for event in pygame.event.get() :
