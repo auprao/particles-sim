@@ -10,6 +10,8 @@ class Particle() :
 
     def draw_particle(self, surface) :
         pygame.draw.circle(surface, self.color, (self.x, self.y), self.radius)
+    def draw_over(self, surface) :
+        pygame.draw.circle(surface, BLACK, (self.x, self.y), self.radius)
 
 class Electron(Particle) :
     def __init__(self, x, y):

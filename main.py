@@ -30,6 +30,7 @@ def main() :
     while looping :
 
         for electron in electrons :
+            electron.draw_over(surface)
             electron.color = random.choice((BLUE, WHITE))
             electron.x += 1
             electron.draw_particle(surface)
