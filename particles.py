@@ -25,6 +25,7 @@ class Electron(Particle) :
         self.y = y
         self.color = BLUE
         self.radius = 3
+        self.electric_charge = False
 
 class Proton(Particle) :
     def __init__(self, x, y):
@@ -32,3 +33,4 @@ class Proton(Particle) :
         self.y = y
         self.color = RED
         self.radius = 6
+        self.electric_charge = True

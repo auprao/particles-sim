@@ -6,8 +6,10 @@ from colors import *
 from constants import *
 
 # TODO : Pauli exclusion principle
-# TODO : interaction table
-# TODO : implement interaction bevery all particles (un-random movement)
+# TODO : implement interaction between all particles (un-random movement)
+
+interaction_table = {"Pr" : {"Pr" : 1, "El" : 1},
+                     "El" : {"Pr" : 1, "El" : 1}}
 
 def main() :
 
@@ -21,7 +23,7 @@ def main() :
 
 
     electrons = []
-    for i in range(PARTICLE_COUNT) :
+    for i in range(ELECTRON_COUNT) :
         x = random.randrange(0, 500)
         y = random.randrange(0, 500)
 
@@ -30,7 +32,7 @@ def main() :
         electron.draw_particle(surface)
         
     protons = []
-    for i in range(10) : 
+    for i in range(PROTON_COUNT) : 
         x = random.randrange(0, 500)
         y = random.randrange(0, 500)
 
