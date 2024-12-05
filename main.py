@@ -31,6 +31,7 @@ def main() :
 
         for electron in electrons :
             electron.color = random.choice((BLUE, WHITE))
+            electron.x += 1
             electron.draw_particle(surface)
 
         for event in pygame.event.get() :
