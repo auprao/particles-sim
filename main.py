@@ -10,20 +10,28 @@ def main() :
     clock = pygame.time.Clock()
 
     pygame.init()
+    pygame.display.set_caption("particles sim")
     window = pygame.display.set_mode((WIDTH_WINDOW, HEIGHT_WINDOW))
     surface = pygame.Surface((500, 500))
     window.fill(BLACK)
 
-    pygame.display.set_caption("particles sim")
-    
+
+    electrons = []
+    for i in range(PARTICLE_COUNT) :
+        x = random.randrange(0, 500)
+        y = random.randrange(0, 500)
+
+        electron = Electron(x, y)
+        electrons.append(electron)
+        electron.draw_particle(surface)
+
     looping = True
 
     while looping :
-        x = random.randrange(50, 450)
-        y = random.randrange(50, 450)
 
-        test_particle = Particle(x, y, 50, BLUE)
-        test_particle.draw_particle(surface)
+        for electron in electrons :
+            electron.color = random.choice((BLUE, WHITE))
+            electron.draw_particle(surface)
 
         for event in pygame.event.get() :
             if event.type == pygame.QUIT :
