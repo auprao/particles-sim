@@ -25,3 +25,10 @@ class Electron(Particle) :
         self.y = y
         self.color = BLUE
         self.radius = 3
+
+class Proton(Particle) :
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.color = RED
+        self.radius = 6
