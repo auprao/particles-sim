@@ -5,12 +5,14 @@ from Particles import *
 from Colors import *
 from Constants import *
 
-# TODO : Pauli exclusion principle
+# TODO : particles shouldn't overlap on spawn
 # TODO : implement interaction between all particles (un-random movement)
+# TODO : continue electromagnetic interaction
 
 electrons = []
 protons = []
 neutrons = []
+all_particles = []
 
 def main() :
 
@@ -47,6 +49,10 @@ def main() :
         neutrons.append(neutron)
         neutron.draw_particle(surface)
 
+    all_particles.extend(electrons)
+    all_particles.extend(protons)
+    all_particles.extend(neutrons)
+
     looping = True
 
     while looping :
@@ -55,12 +61,14 @@ def main() :
             electron.draw_over(surface)
             electron.color = random.choice(electron.colors)
             electron.move_random(electrons)
+            electron.move_electromagnetic(all_particles, electrons)
             electron.draw_particle(surface)
 
         for proton in protons :
             proton.draw_over(surface)
             proton.color = random.choice(proton.colors)
             proton.move_random(protons)
+            proton.move_electromagnetic(all_particles, protons)
             proton.draw_particle(surface)
 
         for neutron in neutrons :
