@@ -1,15 +1,16 @@
 import pygame
 import random
 import sys
-from particles import *
-from colors import *
-from constants import *
+from Particles import *
+from Colors import *
+from Constants import *
 
 # TODO : Pauli exclusion principle
 # TODO : implement interaction between all particles (un-random movement)
 
-interaction_table = {"Pr" : {"Pr" : 1, "El" : 1},
-                     "El" : {"Pr" : 1, "El" : 1}}
+electrons = []
+protons = []
+neutrons = []
 
 def main() :
 
@@ -22,7 +23,6 @@ def main() :
     window.fill(BLACK)
 
 
-    electrons = []
     for i in range(ELECTRON_COUNT) :
         x = random.randrange(0, 500)
         y = random.randrange(0, 500)
@@ -31,7 +31,6 @@ def main() :
         electrons.append(electron)
         electron.draw_particle(surface)
         
-    protons = []
     for i in range(PROTON_COUNT) : 
         x = random.randrange(0, 500)
         y = random.randrange(0, 500)
@@ -40,8 +39,7 @@ def main() :
         protons.append(proton)
         proton.draw_particle(surface)
 
-    neutrons = []
-    for i in range(PROTON_COUNT) : 
+    for i in range(NEUTRON_COUNT) : 
         x = random.randrange(0, 500)
         y = random.randrange(0, 500)
 
@@ -56,19 +54,19 @@ def main() :
         for electron in electrons :
             electron.draw_over(surface)
             electron.color = random.choice(electron.colors)
-            electron.move_random()
+            electron.move_random(electrons)
             electron.draw_particle(surface)
 
         for proton in protons :
             proton.draw_over(surface)
             proton.color = random.choice(proton.colors)
-            proton.move_random()
+            proton.move_random(protons)
             proton.draw_particle(surface)
 
         for neutron in neutrons :
             neutron.draw_over(surface)
             neutron.color = random.choice(neutron.colors)
-            neutron.move_random()
+            neutron.move_random(neutrons)
             neutron.draw_particle(surface)
 
         for event in pygame.event.get() :
@@ -80,7 +78,7 @@ def main() :
         window.blit(surface, (0, 0))
         pygame.display.flip()
         clock.tick(FPS)
-
+   
        
 if __name__ == "__main__":
     main()
