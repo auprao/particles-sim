@@ -40,21 +40,36 @@ def main() :
         protons.append(proton)
         proton.draw_particle(surface)
 
+    neutrons = []
+    for i in range(PROTON_COUNT) : 
+        x = random.randrange(0, 500)
+        y = random.randrange(0, 500)
+
+        neutron = Neutron(x, y)
+        neutrons.append(neutron)
+        neutron.draw_particle(surface)
+
     looping = True
 
     while looping :
 
         for electron in electrons :
             electron.draw_over(surface)
-            electron.color = random.choice((BLUE, WHITE))
+            electron.color = random.choice(electron.colors)
             electron.move_random()
             electron.draw_particle(surface)
 
         for proton in protons :
             proton.draw_over(surface)
-            proton.color = random.choice((RED, ORANGE))
+            proton.color = random.choice(proton.colors)
             proton.move_random()
             proton.draw_particle(surface)
+
+        for neutron in neutrons :
+            neutron.draw_over(surface)
+            neutron.color = random.choice(neutron.colors)
+            neutron.move_random()
+            neutron.draw_particle(surface)
 
         for event in pygame.event.get() :
             if event.type == pygame.QUIT :
