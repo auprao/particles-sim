@@ -23,9 +23,9 @@ class Particle() :
         pygame.draw.circle(surface, BLACK, self.coordinates, self.radius)
 
     def move_random(self, particles) :
-        rand_x = random.randrange(-2, 3)
-        rand_y = random.randrange(-2, 3)
-        self.move_weighted(rand_x, rand_y, particles) 
+        rand_dx = random.randrange(-1, 2)
+        rand_dy = random.randrange(-1, 2)
+        self.move_weighted(rand_dx, rand_dy, particles) 
 
     def move_electromagnetic(self, all_particles, same_particles) :
         # all_particles could be optimized by taking only electric charged particles' lists
@@ -39,14 +39,20 @@ class Particle() :
             if in_x_range and in_y_range :
                 if particle.electric_charge == self.electric_charge :
                     self.move_away_from(particle, same_particles)
-                else : # if opposite sign - probably doesn't need extra elif check
+                else : # if opposite sign
                     self.move_towards(particle, same_particles)
 
     def move_towards(self, particle, particles) :
-        return
+        dx = (particle.x - self.x) / 10
+        dy = (particle.y - self.y) / 10
+        self.move_weighted(dx, dy, particles) 
+
 
     def move_away_from(self, particle, particles) :
-        return             
+        dx = - (particle.x - self.x) / 10
+        dy = - (particle.y - self.y) / 10
+        self.move_weighted(dx, dy, particles) 
+         
 
     def move_weighted(self, dx, dy, particles) :
         new_x = (self.x + (dx / self.mass))
