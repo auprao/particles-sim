@@ -39,7 +39,7 @@ class Particle() :
             if in_x_range and in_y_range :
                 if particle.electric_charge == self.electric_charge :
                     self.move_away_from(particle, same_particles)
-                else : # if opposite sign - probably doesn't need extra elif check?
+                else : # if opposite sign - probably doesn't need extra elif check
                     self.move_towards(particle, same_particles)
 
     def move_towards(self, particle, particles) :

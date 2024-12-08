@@ -28,3 +28,4 @@ class Neutron(Particle) :
         self.electric_charge = 0
         self.mass = 8
         super().__init__(x, y)
+        

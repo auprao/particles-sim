@@ -5,7 +5,7 @@ from Particles import *
 from Colors import *
 from Constants import *
 
-# TODO : particles shouldn't overlap on spawn
+# TODO : particles shouldn't overlap on spawn (add checker to spawn methods)
 # TODO : implement interaction between all particles (un-random movement)
 # TODO : continue electromagnetic interaction
 
