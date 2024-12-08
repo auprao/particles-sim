@@ -72,4 +72,7 @@ class Particle() :
             if self != particle and x_occupied and y_occupied :
                 return False
         return True
+
+    def flicker(self) :
+        self.color = random.choice(self.colors)
             

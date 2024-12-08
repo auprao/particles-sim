@@ -6,8 +6,6 @@ from Colors import *
 from Constants import *
 
 # TODO : particles shouldn't overlap on spawn (add checker to spawn methods)
-# TODO : implement interaction between all particles (un-random movement)
-# TODO : continue electromagnetic interaction
 
 electrons = []
 protons = []
@@ -24,30 +22,9 @@ def main() :
     surface = pygame.Surface((500, 500))
     window.fill(BLACK)
 
-
-    for i in range(ELECTRON_COUNT) :
-        x = random.randrange(0, 500)
-        y = random.randrange(0, 500)
-
-        electron = Electron(x, y)
-        electrons.append(electron)
-        electron.draw_particle(surface)
-        
-    for i in range(PROTON_COUNT) : 
-        x = random.randrange(0, 500)
-        y = random.randrange(0, 500)
-
-        proton = Proton(x, y)
-        protons.append(proton)
-        proton.draw_particle(surface)
-
-    for i in range(NEUTRON_COUNT) : 
-        x = random.randrange(0, 500)
-        y = random.randrange(0, 500)
-
-        neutron = Neutron(x, y)
-        neutrons.append(neutron)
-        neutron.draw_particle(surface)
+    spawn(electrons, Electron, ELECTRON_COUNT, surface)
+    spawn(protons, Proton, PROTON_COUNT, surface)
+    spawn(neutrons, Neutron, NEUTRON_COUNT, surface)
 
     all_particles.extend(electrons)
     all_particles.extend(protons)
@@ -57,25 +34,9 @@ def main() :
 
     while looping :
 
-        for electron in electrons :
-            electron.draw_over(surface)
-            electron.color = random.choice(electron.colors)
-            electron.move_random(electrons)
-            electron.move_electromagnetic(all_particles, electrons)
-            electron.draw_particle(surface)
-
-        for proton in protons :
-            proton.draw_over(surface)
-            proton.color = random.choice(proton.colors)
-            proton.move_random(protons)
-            proton.move_electromagnetic(all_particles, protons)
-            proton.draw_particle(surface)
-
-        for neutron in neutrons :
-            neutron.draw_over(surface)
-            neutron.color = random.choice(neutron.colors)
-            neutron.move_random(neutrons)
-            neutron.draw_particle(surface)
+        move(electrons, all_particles, surface)
+        move(protons, all_particles, surface)
+        move(neutrons, all_particles, surface)
 
         for event in pygame.event.get() :
             if event.type == pygame.QUIT :
@@ -87,6 +48,31 @@ def main() :
         pygame.display.flip()
         clock.tick(FPS)
    
+def spawn(type_list, type, count, surface) :
+    for i in range(count) :
+        x = random.randrange(0, 500)
+        y = random.randrange(0, 500)
+
+        particle = type(x, y)
+        type_list.append(particle)
+        particle.draw_particle(surface)
        
+def move(type_list, all_particles, surface) :
+    
+    #particle.move_strong_nuclear(all_particles, type_list)
+
+    for particle in type_list :
+        particle.flicker()
+        particle.move_random(type_list)
+    
+    if type_list[0].electric_charge != 0 :
+        for particle in type_list :
+            particle.move_electromagnetic(all_particles, type_list)
+
+    for particle in type_list :
+        particle.draw_over(surface)
+        particle.draw_particle(surface)
+
+
 if __name__ == "__main__":
     main()
