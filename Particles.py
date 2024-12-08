@@ -8,6 +8,7 @@ class Electron(Particle) :
         self.colors = [BLUE, WHITE]
         self.radius = 3
         self.electric_charge = -1
+        self.is_nucleon =  False
         self.mass = 1
         super().__init__(x, y)
 
@@ -17,6 +18,7 @@ class Proton(Particle) :
         self.colors = [RED, ORANGE]
         self.radius = 6
         self.electric_charge = +1
+        self.is_nucleon =  True
         self.mass = 10
         super().__init__(x, y)
 
@@ -26,6 +28,7 @@ class Neutron(Particle) :
         self.colors = [DARK_GRAY, LIGHT_GRAY]
         self.radius = 5
         self.electric_charge = 0
+        self.is_nucleon =  True
         self.mass = 8
         super().__init__(x, y)
         

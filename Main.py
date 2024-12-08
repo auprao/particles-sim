@@ -48,28 +48,34 @@ def main() :
         pygame.display.flip()
         clock.tick(FPS)
    
-def spawn(type_list, type, count, surface) :
+def spawn(same_particles, type, count, surface) :
     for i in range(count) :
         x = random.randrange(0, 500)
         y = random.randrange(0, 500)
 
         particle = type(x, y)
-        type_list.append(particle)
+        same_particles.append(particle)
         particle.draw_particle(surface)
        
-def move(type_list, all_particles, surface) :
-    
-    #particle.move_strong_nuclear(all_particles, type_list)
+def move(same_particles, all_particles, surface) :
 
-    for particle in type_list :
+    for particle in same_particles :
         particle.flicker()
-        particle.move_random(type_list)
+        particle.move_random(same_particles)
     
-    if type_list[0].electric_charge != 0 :
-        for particle in type_list :
-            particle.move_electromagnetic(all_particles, type_list)
+    if same_particles[0].electric_charge != 0 : # electrons and protons
+        for particle in same_particles :
+            particle.move_electromagnetic(all_particles, same_particles)
 
-    for particle in type_list :
+        if same_particles[0].is_nucleon : # protons
+            for particle in same_particles :
+                particle.move_strong_nuclear(neutrons, same_particles)
+
+    elif same_particles[0].is_nucleon : # neutrons
+        for particle in same_particles :
+            particle.move_strong_nuclear(protons, same_particles)
+
+    for particle in same_particles :
         particle.draw_over(surface)
         particle.draw_particle(surface)
 
