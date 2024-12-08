@@ -43,15 +43,17 @@ class Particle() :
                     self.move_towards(particle, same_particles)
 
     def move_towards(self, particle, particles) :
-        dx = (particle.x - self.x) / 10
-        dy = (particle.y - self.y) / 10
-        self.move_weighted(dx, dy, particles) 
+        if (particle.x != self.x and particle.y != self.y) : # temp solution to zero division
+            dx = 5 / (particle.x - self.x)
+            dy = 5 / (particle.y - self.y)
+            self.move_weighted(dx, dy, particles) 
 
 
     def move_away_from(self, particle, particles) :
-        dx = - (particle.x - self.x) / 10
-        dy = - (particle.y - self.y) / 10
-        self.move_weighted(dx, dy, particles) 
+        if (particle.x != self.x and particle.y != self.y) :
+            dx = - 5 / (particle.x - self.x)
+            dy = - 5 / (particle.y - self.y)
+            self.move_weighted(dx, dy, particles) 
          
 
     def move_weighted(self, dx, dy, particles) :
